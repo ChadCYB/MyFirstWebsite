@@ -1,0 +1,27 @@
+body{
+	display: block;
+	width: auto;
+	height: auto;
+	padding: 330px 0;
+	text-align: center;
+	color: #fff;
+	background: url(../images/intro-bg.jpg) no-repeat bottom center scroll;
+	background-color: black;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+}
+h1{
+	font-family: Microsoft JhengHei;
+	font-weight: bold;
+	font-size: 110px;
+}
+@media ( max-width :450px) {
+	body {
+		padding: 170px 0;
+	}
+	h1{
+		font-size: 90px;
+	}
+}

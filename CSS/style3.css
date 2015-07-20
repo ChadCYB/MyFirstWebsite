@@ -1,0 +1,22 @@
+.intro {
+	text-align: center;
+	width: 70%;
+	margin: 0 auto;
+	color: white;
+}
+
+.intro-header {
+	background-color: gray;
+	background: no-repeat center center;
+	background-attachment: scroll;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+	margin-bottom: 50px;
+}
+
+.intro .intro-body {
+	display: table-cell;
+	vertical-align: middle;
+}
