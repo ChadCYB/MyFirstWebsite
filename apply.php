@@ -27,7 +27,7 @@
 	</head>
 	<body style="background-image: url('images/apply-bg.jpg')">
 		<?php topNavBarLogin(2);?>
-		<div class="container"  style="margin-top: 5%;">
+		<div class="container"  style="margin-top: 50px;">
 			<h1>報名頁</h1>
 			<form action="apply.php" method="post">
 				<Input type = "button" value="登出" onclick="location.href='logout.php'">		

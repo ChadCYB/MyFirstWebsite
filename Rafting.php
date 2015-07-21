@@ -2,6 +2,10 @@
 <?php 
 	include 'php/mysql_conn.php';
 	include 'fun.inc.php';
+	if(!empty($_SESSION['userID'])){
+		echo '<meta http-equiv=REFRESH CONTENT=0;url=user.php>';
+		exit();
+	}
 ?>
 <html>
 <head>

@@ -16,7 +16,11 @@ function topNavBarLogin($webName){
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li <?php if($webName == 1){echo 'class=active';}?>><a href="Rafting.php">首頁</a></li>
+					<li <?php if($webName == 1){echo 'class=active';}?>><?php if(isset($_SESSION['userID'])){
+																			echo "<a href=user.php>首頁</a></li>";
+																		}else{
+																			echo "<a href=Rafting.php>首頁</a></li>";
+																		}?>
 					<li <?php if($webName == 2){echo 'class=active';}?>><a href="apply.php">報名</a></li>
 					<li <?php if($webName == 3){echo 'class=active';}?>><a href="aboutRafting.php">關於泛舟</a></li>
 				</ul>
@@ -44,11 +48,18 @@ function topNavBarLogin($webName){
 		}
 	}
 	function is_id($str){
-		if(ereg("^[0-9a-zA-Z]{6,}", $str)){
+		if(ereg("^[0-9a-zA-Z]{5,}", $str)){
 			return 1;
 		}else{
 			return 0;
 		}
 	}
+	function is_pw($str){
+		if(ereg("^[0-9a-zA-Z]{6,}", $str)){
+			return 1;
+		}else{
+			return 0;
+		}
+	} 
 ?>
 

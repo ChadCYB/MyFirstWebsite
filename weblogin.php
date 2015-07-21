@@ -213,9 +213,9 @@
 	</div>
 	<?php 
 		if(isset($_POST['acc']) && isset($_POST['pwd'])){
-			$id = $_POST['acc'];
+			$id = preg_replace("/[\'\"]+/" , '' ,$_POST['acc']);
+			$pw = preg_replace("/[\'\"]+/" , '' ,$_POST['pwd']);
 			$pw = md5($_POST['pwd']);
-			$id_DeInject = preg_replace("/[\'\"]+/" , '' ,$id);
 			$sql = "SELECT * FROM `info` WHERE `ID` = '".$id."' ";
 			$result = mysql_query($sql);
 			$row = mysql_fetch_array($result);

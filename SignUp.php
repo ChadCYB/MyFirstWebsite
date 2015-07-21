@@ -236,18 +236,32 @@
 //	 		$pw2 = $_POST['pwd2'];
 //	 		$email = $_POST['mail'];
 // 			print_r($_POST);
-			if(($name == ' ') || ($id == 0) || ($pw1 == ' ') || ($pw2 == ' ') || ($email == ' ')){
-				echo "<script>alert('資料輸入格式錯誤!');</script>";
+			if($name == ' '){
+				echo "<script>alert('姓名格式錯誤!');</script>";
+				exit();
+			}else if(!is_id($id)){
+				echo "<script>alert('使用者ID格式不相符，須至少6位數，請重新輸入!');</script>";
 				exit();
 			}else if($pw1 != $pw2){
 				echo "<script>alert('密碼不相符，請重新輸入!');</script>";
 				exit();
+			}else if(!is_pw($pw1)){
+				echo "<script>alert('密碼格式不相符，須至少6位數之英數字元，請重新輸入!');</script>";
+				exit();
+			}else if(!is_email($email)){
+				echo "<script>alert('E-mail格式不相符，請重新輸入!');</script>";
+				exit();
 			}else{
 				$pw1 = md5($pw1);
+				$sql = "SELECT * FROM `info` WHERE `ID` = '".$id."' ";
+				if(mysql_query($sql)){
+					echo "<script>alert('此帳號ID已經註冊過了');window.location = 'SignUp.php';</script>";
+					exit();
+				}
 				$sql = "INSERT INTO info (ID, Name, Mail, Password)
 						VALUES ('$id','$name','$email','$pw1')";
 				if(@mysql_query($sql)){
-					echo "<script>alert('註冊成功');</script>";
+					echo "<script>alert('註冊成功');window.location = 'weblogin.php';</script>";
 				}else{
 					echo "<script>alert('註冊失敗');</script>";
 				}
