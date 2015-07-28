@@ -7,18 +7,8 @@ $num = mysql_num_rows ( $rsl );
 ?>
 <html>
 <head>
-<title>亞洲泛舟網</title>
-<meta charset="UTF-8">
-<meta name="robots" content="noindex">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="http://www.justinaguilar.com/animations/css/animations.css">
-<script src="http://code.jquery.com/jquery-latest.min.js"
-	type="text/javascript"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<title>亞洲泛舟網</title>
+	<meta charset="UTF-8">
 </head>
 <body style="background-image: url('images/river-bg.jpg')">
 		<?php topNavBarLogin(104);?>
@@ -54,7 +44,7 @@ $num = mysql_num_rows ( $rsl );
 								<td>' . $rows [6] . '</td>
 								<td>' . $rows [7] . '</td>
 								<td>' . (rand(0,600)) . '人</td>
-								<td><a href="apply.php" class="btn btn-success">前往報名</a></td>
+								<td><a href="pass.apply.php" class="btn btn-success">前往報名</a></td>
 							</tr>';
 							/* <td>' . $rows ['Name'] . '</td>
 							 * <td>' . $rows ['Length'] . '</td>

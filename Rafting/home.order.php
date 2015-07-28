@@ -5,21 +5,9 @@ include 'fun.inc.php';
 ?>
 <html lang="zh-TW">
 <head>
-<title>亞洲泛舟網</title>
-<meta charset="UTF-8">
-<meta name="robots" content="noindex">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-<link rel="stylesheet"
-	href="http://www.justinaguilar.com/animations/css/animations.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="http://code.jquery.com/jquery-latest.min.js"
-	type="text/javascript"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<title>亞洲泛舟網</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <style>
 table {
 	border-collapse: collapse;
@@ -79,7 +67,7 @@ function check ()
 	<div class="container" style="margin-top: 50px;">
 		<h1>線上報名</h1>
 		<form id="myform" name="myform" onSubmit="return check();"
-			action="order.php" method="post">
+			action="home.order.php" method="post">
 			<table border="1" cellspacing="0" cellpadding="0" width="100%"
 				style="background: white">
 				<thead>

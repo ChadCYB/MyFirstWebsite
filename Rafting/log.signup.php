@@ -5,13 +5,9 @@
 ?>
 <html>
 <head>
+	<title>亞洲泛舟網</title>
 	<meta charset="UTF-8">
-	<meta name="robots" content="noindex">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="canonical" href="http://codepen.io/petertoth/pen/BtGkp">
-	<link rel="stylesheet" href="http://www.justinaguilar.com/animations/css/animations.css">
-	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<style class="cp-pen-styles">
 	@import	url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700);
 	@import	url(https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css);
@@ -193,41 +189,79 @@
 	</style>
 </head>
 <body>
-	<?php topNavBarLogin(201);?>
-	<div class="login slideDown" style="margin: 13% auto 90% auto">
+	<?php topNavBarLogin(5);?>
+	<div class="login slideUp" style="margin: 13% auto 33% auto">
 		<div class="heading">
-			<h2>Login</h2>
-			<form action="weblogin.php" method="POST">
+			<h2>Sign Up</h2>
+			<form action="log.signup.php" method="POST">
 				<div class="input-group input-group-lg">
-					<span class="input-group-addon"><i class="fa fa-user"></i></span> <input
-						type="text" name="acc" class="form-control" placeholder="使用者ID" required>
+					<span class="input-group-addon"><i class="fa fa-child"></i></span>
+					<input type="text" name="name" class="form-control" placeholder="姓名" required>
 				</div>
 				<div class="input-group input-group-lg">
-					<span class="input-group-addon"><i class="fa fa-lock"></i></span> <input
-						type="password" name="pwd" class="form-control" placeholder="密碼" required>
+					<span class="input-group-addon"><i class="fa fa-user"></i></span>
+					<input type="text" name="acc" class="form-control" placeholder="使用者ID" required>
 				</div>
-				<button type="submit" class="float">登入</button>
-				<button type="button" class="float" value="Sign up" onclick="location.href='SignUp.php'">註冊</button>
+				<div class="input-group input-group-lg">
+					<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+					<input type="password" name="pwd1" class="form-control" placeholder="密碼" required>
+				</div>
+				<div class="input-group input-group-lg">
+					<span class="input-group-addon"><i class="fa fa-check-circle"></i></span>
+					<input type="password" name="pwd2" class="form-control" placeholder="再次確認密碼" required>
+				</div>
+				<div class="input-group input-group-lg">
+					<span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+					<input type="text" name="mail" class="form-control" placeholder="E-mail" required>
+				</div>
+				<button type="submit" class="float">確認註冊</button>
+				<button type="button" class="float" onclick="location.href='weblogin.php'">返回登入</button>
 			</form>
 		</div>
 	</div>
-	<?php 
-		if(isset($_POST['acc']) && isset($_POST['pwd'])){
+	<?php
+		if(isset($_POST['name']) && isset($_POST['acc']) && isset($_POST['pwd1']) && isset($_POST['pwd2']) && isset($_POST['mail'])){
+			$name = preg_replace("/[\'\"]+/" , '' ,$_POST['name']);
 			$id = preg_replace("/[\'\"]+/" , '' ,$_POST['acc']);
-			$pw = preg_replace("/[\'\"]+/" , '' ,$_POST['pwd']);
-			$pw = md5($_POST['pwd']);
-			$sql = "SELECT * FROM `info` WHERE `ID` = '".$id."' ";
-			$result = mysql_query($sql);
-			$row = mysql_fetch_array($result);
-			if($id == $row['ID'] && $pw == $row['Password']){
-				$_SESSION['userID'] = $id;
-				echo "<script>
-						alert('歡迎.".$row['Name']."');
-						window.location = 'apply.php';
-					</script>";
+			$pw1 = preg_replace("/[\'\"]+/" , '' ,$_POST['pwd1']);
+			$pw2 = preg_replace("/[\'\"]+/" , '' ,$_POST['pwd2']);
+			$email = preg_replace("/[\'\"]+/" , '' ,$_POST['mail']);
+//	 		$name = $_POST['name'];
+//	 		$id = $_POST['acc'];
+//	 		$pw1 = $_POST['pwd1'];
+//	 		$pw2 = $_POST['pwd2'];
+//	 		$email = $_POST['mail'];
+// 			print_r($_POST);
+			if($name == ' '){
+				echo "<script>alert('姓名格式錯誤!');</script>";
+				exit();
+			}else if(!is_id($id)){
+				echo "<script>alert('使用者ID格式不相符，須至少6位數，請重新輸入!');</script>";
+				exit();
+			}else if($pw1 != $pw2){
+				echo "<script>alert('密碼不相符，請重新輸入!');</script>";
+				exit();
+			}else if(!is_pw($pw1)){
+				echo "<script>alert('密碼格式不相符，須至少6位數之英數字元，請重新輸入!');</script>";
+				exit();
+			}else if(!is_email($email)){
+				echo "<script>alert('E-mail格式不相符，請重新輸入!');</script>";
+				exit();
 			}else{
-				echo "<script>alert('登入失敗');</script>";
-				//history.go(-1);
+				$pw1 = md5($pw1);
+				$rel = mysql_query("SELECT * FROM `info` WHERE `ID` = '".$id."' ");
+				$numR = mysql_num_rows ($rel);
+				if($numR>0){
+					echo "<script>alert('此帳號ID已經註冊過了');window.location = 'log.signup.php';</script>";
+					exit();
+				}
+				$sql2 = "INSERT INTO info (ID, Name, Mail, Password)
+						VALUES ('$id','$name','$email','$pw1')";
+				if(@mysql_query($sql2)){
+					echo "<script>alert('註冊成功');window.location = 'log.weblogin.php';</script>";
+				}else{
+					echo "<script>alert('註冊失敗');</script>";
+				}
 			}
 		}
 	?>

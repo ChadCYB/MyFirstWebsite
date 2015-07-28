@@ -4,21 +4,23 @@ include 'php/mysql_conn.php';
 include 'fun.inc.php';
 $row = @mysql_query ( "SELECT * FROM `info` WHERE `ID` = '" . $_SESSION ['userID'] . "' " );
 if (! $result = @mysql_fetch_array ( $row )) {
-	echo "<script> alert('請先登入'); window.location = 'weblogin.php'; </script>";
+	echo "<script> alert('請先登入'); window.location = 'log.weblogin.php'; </script>";
 	exit ();
 } else {
 	/*
 	 * SELECT
-	 * game.matchID, river.Name,
-	 * competition.difficulty, competition.price,
-	 * competition.matchDate, game.status
+	 *  game.matchID, river.Name,
+	 *  competition.difficulty, competition.price,
+	 *  competition.matchDate, game.status
 	 * FROM
-	 * game, river, competition ,info
+	 *  game, river, competition ,info
 	 * WHERE
-	 * game.matchID = competition.matchID AND competition.riverID = river.No
-	 * AND game.userID = info.userID AND info.ID = 103001
+	 *  game.matchID = competition.matchID AND competition.riverID = river.No
+	 *  AND game.userID = info.userID AND info.ID = 103001
 	 */
-	$rowGame = @mysql_query ( "SELECT game.matchID, river.Name, competition.difficulty, competition.price, competition.matchDate, game.status FROM game, river, competition ,info WHERE game.matchID = competition.matchID AND competition.riverID = river.No AND game.userID = info.userID AND info.ID = '" . $_SESSION ['userID'] . "' " );
+	$rowGame = @mysql_query ( "SELECT game.matchID, river.Name, competition.difficulty, competition.price, competition.matchDate, game.status 
+			FROM game, river, competition ,info WHERE game.matchID = competition.matchID AND competition.riverID = river.No 
+			AND game.userID = info.userID AND info.ID = '" . $_SESSION ['userID'] . "' " );
 	$numGame = mysql_num_rows ( $rowGame );
 }
 ?>
@@ -26,13 +28,6 @@ if (! $result = @mysql_fetch_array ( $row )) {
 <head>
 	<title>亞洲泛舟網</title>
 	<meta charset="UTF-8">
-	<meta name="robots" content="noindex">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="http://www.justinaguilar.com/animations/css/animations.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<?php
 		function get_exp($exp) {
 			$lv = 1;
@@ -169,7 +164,7 @@ if (! $result = @mysql_fetch_array ( $row )) {
 		</div>
 		<form action="apply.php" method="post">
 			<Input type="button" class="btn btn-primary btn-lg" value="登出"
-				onclick="location.href='logout.php'">
+				onclick="location.href='../login/logout.php'">
 		</form>
 	</div>
 </body>
