@@ -15,18 +15,18 @@ if (! @mysql_fetch_array ( $row )) {
 	river.Name,
 	competition.difficulty,
 	competition.price,
-	competition.maxPeople
+	competition.maxPeople, 
+	competition.matchDate
    FROM
 	competition,
-	river,
-	game
+	river
    WHERE
-	competition.matchID = game.matchID
-	AND river.No = competition.riverID
+	river.No = competition.riverID
+	AND competition.status = 0
  */
 $rsl = mysql_query ( "SELECT competition.matchID, river.Name, competition.difficulty, competition.price,  
-		competition.maxPeople FROM competition, river, game WHERE competition.matchID = game.matchID 
-		AND river.No = competition.riverID AND competition.status = 0" );
+		competition.maxPeople, competition.matchDate FROM competition, river WHERE river.No = competition.riverID
+		AND competition.status = 0" );
 $num = mysql_num_rows ( $rsl );
 ?>
 <html>
@@ -45,7 +45,7 @@ $num = mysql_num_rows ( $rsl );
 					<th>泛舟河流</th>
 					<th>泛舟難度</th>
 					<th>報名費用</th>
-					<th>泛舟人數</th>
+					<th>活動人數</th>
 					<th>報名人數</th>
 					<th>泛舟日期</th>
 					<th></th>
@@ -58,18 +58,43 @@ $num = mysql_num_rows ( $rsl );
 					$rsCount = @mysql_query ( "SELECT COUNT(*) FROM `game` WHERE game.matchID = '" . $rows ['matchID'] . "' " );
 					$count = @mysql_fetch_row ( $rsCount ); // <<<報名人數
 					echo '<tr>
-							<th scope="row">' . $rows ['matchID'] . '</th>
+							<th scope="row">' . $rows['matchID'] . '</th>
 							<td>' . $rows ['Name'] . '</td>
 							<td>LV.' . $rows ['difficulty'] . '</td>
 							<td>' . $rows ['price'] . '萬</td>
 							<td>' . $rows ['maxPeople'] . '</td>
-							<td>' . $count [0] . '</td>';
+							<td>' . $count [0] . '</td>
+							<td>' . $rows ['matchDate'] . '</td>';
 					if ($rows ['maxPeople'] > $count [0]) {
-						echo '<td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"
-								onclick="catchClick(' . $rows [1] . ')">前往報名</button></td></tr>';
+						echo '<td><input type="submit" class="btn btn-success" data-toggle="modal" 
+								data-target="#myModal'.$rows['matchID'].'" value="前往報名"></td></tr>';
 					} else {
-						echo '<td><button type="button" class="btn btn-danger" disabled="disabled"">額滿截止</button></td></tr>';
+						echo '<td><button type="button" class="btn btn-danger" disabled="disabled">
+								額滿截止</button></td></tr>';
 					}
+				echo'<div class="modal fade" id="myModal'.$rows['matchID'].'" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">梯次'.$rows['matchID'].'</h4>
+						</div>
+						<div class="modal-body">
+							<p>報名費用' . $rows ['price'] . '萬</p>
+							<p>動力舟</p>
+							
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+					</div>
+				</div>';
 				}
 				?>
 			</tbody>
@@ -79,6 +104,12 @@ $num = mysql_num_rows ( $rsl );
 				onclick="location.href='log.logout.php'">
 		</form>
 	</div>
+	<?php 
+	$fade_MatchID = 123;
+	if(isset($_POST['matID'])){
+		$fade_MatchID = $_POST['matID'];
+	}
+	?>
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -88,11 +119,12 @@ $num = mysql_num_rows ( $rsl );
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">梯次</h4>
+					<h4 class="modal-title" id="myModalLabel">梯次<?php echo $fade_MatchID; ?></h4>
 				</div>
 				<div class="modal-body">
 					<p>自動排水舟</p>
 					<p>動力舟</p>
+					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://www.justinaguilar.com/animations/css/animations.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
@@ -71,7 +71,7 @@ $PermitLV = $PerResult['Permission'];
 								</a>
 								<ul class="dropdown-menu">
 									<li><a href="mag.userInfo.php"><i class="fa fa-user"></i> 個人資料</a></li>
-									<li><a href="mag.changePW.php"><i class="fa fa-key"></i> 密碼更改</a></li>
+									<li><a href="mag.changePW.php"><i class="fa fa-expeditedssl"></i> 密碼更改</a></li>
 									<li role="separator" class="divider"></li>
 									<li><a href=home.donate.php><i class="fa fa-credit-card"> Donate</i></a></li>';
 							if($PermitLV == 5){

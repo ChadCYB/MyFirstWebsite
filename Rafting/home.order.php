@@ -284,10 +284,12 @@ function check ()
 							style="width: 100px; height: 40px;"></td>
 					</tr>
 					<?php
-// 					echo "<script> if(check()){
-// 							alert('報名表已送出，我們將會盡速聯絡你');
-// 							window.location = 'Rafting.php';
-// 						}</script>";
+						if(isset($_POST['sure'])){
+							echo "<script> if(check()){
+									alert('報名表已送出，我們將會盡速聯絡你');
+									window.location = 'Rafting.php';}
+								}</script>";
+						}
 					?>
 				</tbody>
 			</table>
