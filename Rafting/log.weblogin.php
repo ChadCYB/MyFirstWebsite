@@ -2,6 +2,12 @@
 <?php 
 	include 'php/mysql_conn.php';
 	include 'fun.inc.php';
+	if (isset($_SESSION ['userID'])) {
+		echo "<script>
+				window.location = 'pass.user.php';
+		</script>";
+		exit ();
+	}
 ?>
 <html>
 <head>
@@ -216,6 +222,7 @@
 			$row = mysql_fetch_array($result);
 			if($id == $row['ID'] && $pw == $row['Password']){
 				$_SESSION['userID'] = $id;
+				$_SESSION['uID'] = $row['userID'];
 				echo "<script>
 						alert('歡迎.".$row['Name']."');
 						window.location = 'pass.apply.php';

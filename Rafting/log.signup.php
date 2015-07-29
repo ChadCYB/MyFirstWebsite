@@ -212,7 +212,7 @@
 				</div>
 				<div class="input-group input-group-lg">
 					<span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
-					<input type="text" name="mail" class="form-control" placeholder="E-mail" required>
+					<input type="email" name="mail" class="form-control" placeholder="E-mail" required>
 				</div>
 				<button type="submit" class="float">確認註冊</button>
 				<button type="button" class="float" onclick="location.href='weblogin.php'">返回登入</button>

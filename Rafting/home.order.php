@@ -277,17 +277,17 @@ function check ()
 						</td>
 					</tr>
 					<tr>
-						<td align="center" colspan="2"><input type="reset"
-							class="btn btn-danger" name="nosure" value="修改重填"
-							style="width: 100px; height: 40px;"> &nbsp;&nbsp;&nbsp; <input
-							type="submit" class="btn btn-success" name="sure" value="確定送出"
+						<td align="center" colspan="2">
+						<input type="reset" class="btn btn-danger" name="nosure" value="修改重填"
+							style="width: 100px; height: 40px;"> &nbsp;&nbsp;&nbsp;
+						<input type="submit" class="btn btn-success" name="sure" value="確定送出"
 							style="width: 100px; height: 40px;"></td>
 					</tr>
 					<?php
-					echo "<script> if(check()){
-							alert('報名表已送出，我們將會盡速聯絡你');
-							window.location = 'Rafting.php';
-						}</script>";
+// 					echo "<script> if(check()){
+// 							alert('報名表已送出，我們將會盡速聯絡你');
+// 							window.location = 'Rafting.php';
+// 						}</script>";
 					?>
 				</tbody>
 			</table>

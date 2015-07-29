@@ -14,6 +14,9 @@
 <?php
 session_start ();
 function topNavBarLogin($webName) {
+$PermitRow = @mysql_query ( "SELECT `Permission` FROM `info` WHERE `ID` = '" . $_SESSION ['userID'] . "' " );
+$PerResult = @mysql_fetch_array($PermitRow);
+$PermitLV = $PerResult['Permission'];
 ?>
 <nav class="navbar navbar-inverse navbar-fixed-top slideDown">
 	<div class="container slideDown">
@@ -55,10 +58,8 @@ function topNavBarLogin($webName) {
 						echo '<a href="home.aboutRafting.php">關於泛舟</a></li>';
 					}
  				?>
-				
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-
 				<li <?php if($webName == 201){echo 'class=active';}?>><?php
 						if (isset ( $_SESSION ['userID'] )) {
 							echo '
@@ -69,14 +70,17 @@ function topNavBarLogin($webName) {
 								  <span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a href="#"><i class="fa fa-user"></i> 個人資料</a></li>
-									<li><a href="#"><i class="fa fa-key"></i> 修改密碼</a></li>
+									<li><a href="mag.userInfo.php"><i class="fa fa-user"></i> 個人資料</a></li>
+									<li><a href="mag.changePW.php"><i class="fa fa-key"></i> 密碼更改</a></li>
 									<li role="separator" class="divider"></li>
-									<li><a href=home.donate.php><i class="fa fa-credit-card"> Donate</i></a></li>
-									<li><a href=log.logout.php><i class="fa fa-sign-out"> 登出</i></a></li>
-								</ul>
-							</li>
-							';
+									<li><a href=home.donate.php><i class="fa fa-credit-card"> Donate</i></a></li>';
+							if($PermitLV == 5){
+								echo '<li><a href="mag.alluser.php"><i class="fa fa-users"> 會員管理</i></a></li>
+									  <li><a href="mag.race.php"><i class="fa fa-server"> 賽事管理</i></a></li>
+									  <li><a href="mag.shop.php"><i class="fa fa-shirtsinbulk"> 商店管理</i></a></li> </ul></li>';
+							} else {
+								echo'</ul></li>';
+							}
 						} else {
 							echo "<a href=log.weblogin.php>登入</a></li>";
 						}
