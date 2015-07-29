@@ -28,7 +28,7 @@ $num = mysql_num_rows ( $rsl );
 </head>
 <body style="background-image: url('images/apply-bg.jpg')">
 	<?php topNavBarLogin(201);?>
-	<div style="margin: 70px 10px; background-color: rgba(255, 0, 0, 0.5);">
+	<div style="margin: 70px 10px; background-color: rgba(0, 28, 255, 0.4);">
 		<h1 style="font-weight: bold; text-align:center; color:white">會員總表</h1>
 		<table class="table table-striped table-hover" style="font-size: 16px; background: white">
 			<thead><tr>

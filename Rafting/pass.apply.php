@@ -72,25 +72,49 @@ $num = mysql_num_rows ( $rsl );
 						echo '<td><button type="button" class="btn btn-danger" disabled="disabled">
 								額滿截止</button></td></tr>';
 					}
-				echo'<div class="modal fade" id="myModal'.$rows['matchID'].'" tabindex="-1"
+				echo'
+					<div class="modal fade" id="myModal'.$rows['matchID'].'" tabindex="-1"
 						role="dialog" aria-labelledby="myModalLabel">
 					<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel">梯次'.$rows['matchID'].'</h4>
+							<button class="btn btn-primary fa fa-safari" type="button" style="font-size: 40px">
+								泛舟梯次 <span class="badge" style="font-size: 30px">'.$rows['matchID'].'</span>
+							</button>
 						</div>
-						<div class="modal-body">
-							<p>報名費用' . $rows ['price'] . '萬</p>
-							<p>動力舟</p>
-							
+						<div class="modal-body bg-info">
+							<div class="form-group has-success">
+							  <div class="input-group">
+							    <span class="input-group-addon"></span>
+								<input class="form-control input-lg" style="font-weight:bold"
+								type="text" value="等級限制' . $rows ['difficulty'] . '等" readonly>
+							  </div>
+							</div>
+							<div class="form-group has-success">
+							  <div class="input-group">
+							    <span class="input-group-addon"></span>
+								<input class="form-control input-lg" style="font-weight:bold"
+								type="text" value="報名費用' . $rows ['price'] . '萬" readonly>
+							  </div>
+							</div>
+							<div class="form-group has-success">
+							  <div class="input-group">
+							    <span class="input-group-addon"></span>
+								<input class="form-control input-lg" style="font-weight:bold"
+								type="text" value="泛舟日' . $rows ['matchDate'] . '" readonly>
+							  </div>
+							</div>
+							<input class="form-control input-lg" style="font-weight:bold"
+								type="text" value="" readonly>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save changes</button>
+							<form action="pass.apply.php" method="post">
+								<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+								<input type="submit" class="btn btn-primary" value="確認報名" onclick="Register(aa)">
+							</form>
 						</div>
 					</div>
 					</div>
@@ -105,7 +129,9 @@ $num = mysql_num_rows ( $rsl );
 		</form>
 	</div>
 	<?php 
-	$fade_MatchID = 123;
+	function Register($sql) {
+		echo "<script>alert('$sql')</script>";
+	}
 	if(isset($_POST['matID'])){
 		$fade_MatchID = $_POST['matID'];
 	}

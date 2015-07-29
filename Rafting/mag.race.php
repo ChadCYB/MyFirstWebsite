@@ -59,6 +59,7 @@ $numAll = mysql_num_rows ( $rslAll );
 					<th>難度</th>
 					<th>費用</th>
 					<th>最大人數</th>
+					<th>活動日期</th>
 					<th></th>
 				</tr> </thead>
 				<tbody> <tr>
@@ -66,12 +67,13 @@ $numAll = mysql_num_rows ( $rslAll );
 						<option value="">River</option>
 						<?php for($i = 0; $i < $num; $i ++) {
 							$rowRiv = mysql_fetch_row ( $rslRiv );
-							echo "<option value=". $rowRiv[0] .">".$rowRiv[0]." ".$rowRiv[1]."</option>";
+							echo "<option value=". $rowRiv[0] .">".$rowRiv[0].".".$rowRiv[1]."</option>";
 						}?>
 					</select></th>
-					<td><input type="text" class="form-control" placeholder="difficulty" name="diff"></td>
-					<td><input type="text" class="form-control" placeholder="price" name="price"></td>
-					<td><input type="text" class="form-control" placeholder="maxPeople" name="maxP"></td>
+					<td><input type="text" class="form-control" placeholder="Difficulty" name="diff"></td>
+					<td><input type="text" class="form-control" placeholder="Price" name="price"></td>
+					<td><input type="text" class="form-control" placeholder="Max people" name="maxP"></td>
+					<td><input type="text" class="form-control" placeholder="After N day" name="afterDate"></td>
 					<td><input type="submit" class="btn btn-success" name="sure" value="新增"></td>
 				</tr> </tbody>
 			</table>
@@ -90,10 +92,11 @@ $numAll = mysql_num_rows ( $rslAll );
 		$diff = preg_replace("/[\'\"]+/" , '' ,$_POST['diff']);
 		$price = preg_replace("/[\'\"]+/" , '' ,$_POST['price']);
 		$maxP = preg_replace("/[\'\"]+/" , '' ,$_POST['maxP']);
-		// 		INSERT INTO `competition` (`riverID`, `difficulty`, `price`, `maxPeople`, `matchDate`)
-		// 		VALUES ('2', '5', '3', '30', CURRENT_DATE())
+		$aDay =  preg_replace("/[\'\"]+/" , '' ,$_POST['afterDate']);
+		// INSERT INTO `competition` ( `riverID`, `difficulty`, `price`, `maxPeople`, `matchDate` ) 
+		// VALUES ( '8', '6', '5', '20', ADDDATE( CURRENT_DATE(), INTERVAL 4 DAY ) )
 		$sqlAddRiver = "INSERT INTO `competition` (`riverID`, `difficulty`, `price`, `maxPeople`, `matchDate`)
-		VALUES ('$riverID','$diff','$price','$maxP',CURRENT_DATE())";
+		VALUES ('$riverID','$diff','$price','$maxP',ADDDATE( CURRENT_DATE(),INTERVAL '$aDay' DAY ))";
 		if(@mysql_query($sqlAddRiver)){
 			echo "<script>alert('新增成功');window.location = 'mag.race.php';</script>";
 		}else{

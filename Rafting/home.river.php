@@ -13,7 +13,7 @@ $num = mysql_num_rows ( $rsl );
 <body style="background-image: url('images/river-bg.jpg')">
 		<?php topNavBarLogin(104);?>
 		<div class="container" style="margin-top: 40px;">
-			<h1 class="bg-primary" style="font-weight: bold">自己泛的河自己挑</h1>
+			<h1 class="bg-primary" style="font-weight: bold; padding:5px">自己泛的河自己挑</h1>
 			<table class="table table-striped table-hover"
 				style="background: white">
 				<thead>
