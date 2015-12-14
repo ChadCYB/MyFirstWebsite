@@ -1,8 +1,8 @@
-<!DOCTYPE HTML>
 <?php
-include 'php/mysql_conn.php';
 include 'fun.inc.php';
+include 'php/mysql_conn.php';
 ?>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<title>亞洲泛舟網</title>

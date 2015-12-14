@@ -1,12 +1,13 @@
-<!DOCTYPE HTML>
 <?php 
-	include 'php/mysql_conn.php';
 	include 'fun.inc.php';
+	include 'php/mysql_conn.php';
+	
 	if(!empty($_SESSION['userID'])){
 		echo '<meta http-equiv=REFRESH CONTENT=0;url=pass.user.php>';
 		exit();
 	}
 ?>
+<!DOCTYPE HTML>
 <html>
 <head>
 <!-- 	<meta name="viewport" content="width=device-width, initial-scale=1"> -->

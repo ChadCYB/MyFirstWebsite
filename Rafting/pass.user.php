@@ -1,7 +1,7 @@
-<!DOCTYPE HTML>
 <?php
-include 'php/mysql_conn.php';
 include 'fun.inc.php';
+include 'php/mysql_conn.php';
+
 $row = @mysql_query ( "SELECT * FROM `info` WHERE `ID` = '" . $_SESSION ['userID'] . "' " );
 if (! $result = @mysql_fetch_array ( $row )) {
 	echo "<script> alert('請先登入'); window.location = 'log.weblogin.php'; </script>";
@@ -9,7 +9,7 @@ if (! $result = @mysql_fetch_array ( $row )) {
 } else {
 	/*
 	 * SELECT
-	 *  game.matchID, river.Name,
+	 *  game.ID, game.matchID, river.Name,
 	 *  competition.difficulty, competition.price,
 	 *  competition.matchDate, game.status
 	 * FROM
@@ -18,12 +18,13 @@ if (! $result = @mysql_fetch_array ( $row )) {
 	 *  game.matchID = competition.matchID AND competition.riverID = river.No
 	 *  AND game.userID = info.userID AND info.ID = 103001
 	 */
-	$rowGame = @mysql_query ( "SELECT game.matchID, river.Name, competition.difficulty, competition.price, competition.matchDate, game.status 
+	$rowGame = @mysql_query ( "SELECT game.ID, game.matchID, river.Name, competition.difficulty, competition.price, competition.matchDate, game.status 
 			FROM game, river, competition ,info WHERE game.matchID = competition.matchID AND competition.riverID = river.No 
 			AND game.userID = info.userID AND info.ID = '" . $_SESSION ['userID'] . "' " );
 	$numGame = mysql_num_rows ( $rowGame );
 }
 ?>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<title>亞洲泛舟網</title>
@@ -124,6 +125,7 @@ if (! $result = @mysql_fetch_array ( $row )) {
 						<th>泛舟梯次</th>
 						<th>泛舟河流</th>
 						<th>泛舟難度</th>
+						<th>泛舟日期</th>
 						<th>金額</th>
 						<th>進度</th>
 						<th>狀況</th>
@@ -132,30 +134,51 @@ if (! $result = @mysql_fetch_array ( $row )) {
 				</thead>
 				<tbody>
 				<?php
-				$rnd = rand ( 1, 12 );
+				$today = date('Y-m-j');
+
 				for($i = 0; $i < $numGame; $i ++) {
 					$rows = mysql_fetch_array ( $rowGame );
-					$rnd2 = rand ( 0, 100 );
+					$gameDay = $rows ['matchDate'];		//泛舟日
+					$gameStat = $rows ['status'];			//玩家比賽狀態
+
+					if($today == $gameDay){
+						$calTime = date("H")*60+date("i");
+						$perCal = floor(($calTime*100)/(24*60));	
+					}else if($today > $gameDay){
+						$perCal = 100;
+					}else{
+						$perCal = 0;
+					}
+					
 					echo '<tr>
 							<th scope="row">' . $rows ['matchID'] . '</th>
 							<td>' . $rows ['Name'] . '</td>
 							<td>LV.' . $rows ['difficulty'] . '</td>
+							<td>' . $gameDay .'</td>
 							<td>' . $rows ['price'] . '萬</td>
 							<td><div class="progress">
 								<div class="progress-bar" role="progressbar" aria-valuenow="0"
 									aria-valuemin="0" aria-valuemax="100"
-									style="width: ' . $rnd2 . '%">
-									' . $rnd2 . '%
+									style="width: ' . $perCal . '%">
+									' . $perCal . '%
 								</div>
 							</div></td>';
-					if (100 == $rnd2) {
-						echo '<td><button type="button" class="btn btn-success">泛舟完成</button></td>	</tr>';
-					} else if (0 == $rnd2) {
-						echo '<td><button type="button" class="btn btn-danger" disabled="disabled">
-								尚未開始...</button></td>	</tr>';
-					} else {
-						echo '<td><button type="button" class="btn btn-warning" disabled="disabled">
-								泛舟中...</button></td>	</tr>';
+					if ($gameStat == 1) {
+						echo '<td><button type="button" class="btn btn-success">
+									泛舟完成</button></td>	</tr>';
+					}else{
+						 if ($today == $gameDay) {
+							echo '<td><button type="button" class="btn btn-warning">
+									泛舟中...</button></td>	</tr>';
+						} else if ($today < $gameDay){
+							echo '<td><button type="button" class="btn btn-danger">
+									尚未開始...</button></td>	</tr>';
+						}else{
+							$reward = 'getReward.php?gameID='. $rows['ID'];
+							echo '<td><button type="button" class="btn btn-primary" 
+									onclick="location.href=\''.$reward.'\'">
+									領取獎勵</button></td></tr>';
+						}
 					}
 				}
 				?>

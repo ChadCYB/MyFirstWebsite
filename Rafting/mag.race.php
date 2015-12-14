@@ -1,7 +1,8 @@
-<!DOCTYPE HTML>
 <?php
 include 'php/mysql_conn.php';
 include 'fun.inc.php';
+include 'fun.dataTable.php';
+
 $row = @mysql_query ( "SELECT * FROM `info` WHERE `ID` = '" . $_SESSION ['userID'] . "' " );
 if (! $result = @mysql_fetch_array ( $row )) {
 	echo "<script>
@@ -29,6 +30,7 @@ $rslAll = mysql_query ( "SELECT competition.matchID, river.Name, competition.dif
 	competition.maxPeople, competition.status, competition.matchDate FROM competition, river WHERE river.No = competition.riverID");
 $numAll = mysql_num_rows ( $rslAll );
 ?>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<title>亞洲泛舟網</title>
@@ -79,13 +81,13 @@ $numAll = mysql_num_rows ( $rslAll );
 			</table>
 		</form>
 	</div>
-	<form class="navbar-form navbar-left ">
+<!-- 	<form class="navbar-form navbar-left ">
 	  <div class="form-group">
 	    <input type="text" class="form-control" placeholder="Search">
 	  </div>
 	  <button type="submit" class="btn btn-default">Search</button>
 	</form>
-	
+	 -->
 	<?php 
 	if(isset($_POST['sure'])){
 		$riverID = preg_replace("/[\'\"]+/" , '' ,$_POST['riverID']);
@@ -104,7 +106,7 @@ $numAll = mysql_num_rows ( $rslAll );
 		}
 	}
 	?>
-	<table class="table table-striped table-hover" style="font-size: 14px; background-color:white;">
+	<table id="myTable" class="table table-striped table-hover" style="font-size: 14px; background-color:white;">
 		<thead>
 			<tr>
 				<th>MatchID</th>

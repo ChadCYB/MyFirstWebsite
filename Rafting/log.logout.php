@@ -38,7 +38,7 @@
 
 <body class="element">
   <h4 class="h404 fadeIn">登出中...</h4>
-  <img src="https://cdn4.iconfinder.com/data/icons/sample/512/logout-512.png" 
+  <img src="images/logout.png" 
   alt="LOGOUT" style="position: absolute; left: 50%; top: 50%; margin-left: -285px; margin-top: -190px;">
 </body>
 

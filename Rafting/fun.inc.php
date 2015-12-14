@@ -1,18 +1,24 @@
+<?php
+session_start ();
+?>
 <html>
 <head>
 	<title>亞洲泛舟網</title>
 	<meta charset="UTF-8">
 	<meta name="robots" content="noindex">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="http://www.justinaguilar.com/animations/css/animations.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/animations.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<script src="//code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- x-editable -->
+	<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 </head>
 </html>
 <?php
-session_start ();
+
 function topNavBarLogin($webName) {
 $PermitRow = @mysql_query ( "SELECT `Permission` FROM `info` WHERE `ID` = '" . $_SESSION ['userID'] . "' " );
 $PerResult = @mysql_fetch_array($PermitRow);
@@ -55,7 +61,7 @@ $PermitLV = $PerResult['Permission'];
 					if (isset ( $_SESSION ['userID'] )) {
 						echo '<a href="pass.shop.php"><i class="fa fa-shopping-cart"> 商店</i></a></li>';
 					} else {
-						echo '<a href="home.aboutRafting.php">關於泛舟</a></li>';
+						echo '<a href="home.aboutRafting.php"><i class="fa fa-flag-checkered"></i> 關於泛舟</a></li>';
 					}
  				?>
 			</ul>

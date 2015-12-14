@@ -1,26 +1,28 @@
-<!DOCTYPE HTML>
 <?php
-include 'php/mysql_conn.php';
-include 'fun.inc.php';
-$row = @mysql_query ( "SELECT * FROM `info` WHERE `ID` = '" . $_SESSION ['userID'] . "' " );
-if (! $result = @mysql_fetch_array ( $row )) {
-	echo "<script>
-			alert('請先登入'); window.location = 'log.weblogin.php';
-		</script>";
-	exit ();
-}else{
-	$Permit = $result['Permission'];
-	if( $Permit != 5){
+	include 'php/mysql_conn.php';
+	include 'fun.inc.php';
+	include 'fun.dataTable.php';
+	
+	$row = @mysql_query ( "SELECT * FROM `info` WHERE `ID` = '" . $_SESSION ['userID'] . "' " );
+	if (! $result = @mysql_fetch_array ( $row )) {
 		echo "<script>
-			alert('權限不符'); history.go(-1);
-		</script>";
+				alert('請先登入'); window.location = 'log.weblogin.php';
+			</script>";
 		exit ();
+	}else{
+		$Permit = $result['Permission'];
+		if( $Permit != 5){
+			echo "<script>
+				alert('權限不符'); history.go(-1);
+			</script>";
+			exit ();
+		}
 	}
-}
-
-$rsl = mysql_query ( "SELECT * FROM `info` WHERE 1" );
-$num = mysql_num_rows ( $rsl );
+	
+	$rsl = mysql_query ( "SELECT * FROM `info` WHERE 1" );
+	$num = mysql_num_rows ( $rsl );
 ?>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<title>亞洲泛舟網</title>
@@ -30,7 +32,7 @@ $num = mysql_num_rows ( $rsl );
 	<?php topNavBarLogin(201);?>
 	<div style="margin: 70px 10px; background-color: rgba(0, 28, 255, 0.4);">
 		<h1 style="font-weight: bold; text-align:center; color:white">會員總表</h1>
-		<table class="table table-striped table-hover" style="font-size: 16px; background: white">
+		<table id="outputTable" class="table table-striped table-hover" style="font-size: 16px; background: white">
 			<thead><tr>
 				<th>uID</th>
 				<th>ID</th>

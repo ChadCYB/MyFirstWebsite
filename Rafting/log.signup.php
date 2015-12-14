@@ -1,8 +1,8 @@
-<!DOCTYPE HTML>
-<?php 
-	include 'php/mysql_conn.php';
+<?php
 	include 'fun.inc.php';
+	include 'php/mysql_conn.php';
 ?>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<title>亞洲泛舟網</title>
@@ -215,7 +215,7 @@
 					<input type="email" name="mail" class="form-control" placeholder="E-mail" required>
 				</div>
 				<button type="submit" class="float">確認註冊</button>
-				<button type="button" class="float" onclick="location.href='weblogin.php'">返回登入</button>
+				<button type="button" class="float" onclick="location.href='log.weblogin.php'">返回登入</button>
 			</form>
 		</div>
 	</div>
@@ -226,12 +226,7 @@
 			$pw1 = preg_replace("/[\'\"]+/" , '' ,$_POST['pwd1']);
 			$pw2 = preg_replace("/[\'\"]+/" , '' ,$_POST['pwd2']);
 			$email = preg_replace("/[\'\"]+/" , '' ,$_POST['mail']);
-//	 		$name = $_POST['name'];
-//	 		$id = $_POST['acc'];
-//	 		$pw1 = $_POST['pwd1'];
-//	 		$pw2 = $_POST['pwd2'];
-//	 		$email = $_POST['mail'];
-// 			print_r($_POST);
+
 			if($name == ' '){
 				echo "<script>alert('姓名格式錯誤!');</script>";
 				exit();

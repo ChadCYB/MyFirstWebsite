@@ -1,10 +1,12 @@
-<!DOCTYPE HTML>
 <?php
-include 'php/mysql_conn.php';
-include 'fun.inc.php';
-$rsl = mysql_query ( "SELECT * FROM river WHERE 1" );
-$num = mysql_num_rows ( $rsl );
+	include 'php/mysql_conn.php';
+	include 'fun.inc.php';
+	include 'fun.dataTable.php';
+
+	$rsl = mysql_query ( "SELECT * FROM river WHERE 1" );
+	$num = mysql_num_rows ( $rsl );
 ?>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<title>亞洲泛舟網</title>
@@ -14,7 +16,7 @@ $num = mysql_num_rows ( $rsl );
 		<?php topNavBarLogin(104);?>
 		<div class="container" style="margin-top: 40px;">
 			<h1 class="bg-primary" style="font-weight: bold; padding:5px">自己泛的河自己挑</h1>
-			<table class="table table-striped table-hover"
+			<table id="myTable" class="table table-striped table-hover"
 				style="background: white">
 				<thead>
 					<tr>
@@ -43,8 +45,8 @@ $num = mysql_num_rows ( $rsl );
 								<td>' . $rows [5] . '</td>
 								<td>' . $rows [6] . '</td>
 								<td>' . $rows [7] . '</td>
-								<td>' . (rand(0,600)) . '人</td>
-								<td><a href="pass.apply.php" class="btn btn-success">前往報名</a></td>
+								<td>' . (rand(0,500)) . '人</td>
+								<td><a href="pass.apply.php?river='.$rows [0].'" class="btn btn-success">前往報名</a></td>
 							</tr>';
 							/* <td>' . $rows ['Name'] . '</td>
 							 * <td>' . $rows ['Length'] . '</td>

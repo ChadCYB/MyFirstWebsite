@@ -1,17 +1,17 @@
-<!DOCTYPE HTML>
 <?php
-include 'php/mysql_conn.php';
-include 'fun.inc.php';
-$row = @mysql_query ( "SELECT * FROM `info` WHERE `ID` = '" . $_SESSION ['userID'] . "' " );
-if (! $result = @mysql_fetch_array ( $row )) {
-	echo "<script>
-			alert('請先登入'); window.location = 'log.weblogin.php';
-		</script>";
-	exit ();
-}
-$Permit = $result['Permission'];
-
+	include 'fun.inc.php';
+	include 'php/mysql_conn.php';
+	
+	$row = @mysql_query ( "SELECT * FROM `info` WHERE `ID` = '" . $_SESSION ['userID'] . "' " );
+	if (! $result = @mysql_fetch_array ( $row )) {
+		echo "<script>
+				alert('請先登入'); window.location = 'log.weblogin.php';
+			</script>";
+		exit ();
+	}
+	$Permit = $result['Permission'];
 ?>
+<!DOCTYPE HTML>
 <html>
 <head>
 <title>亞洲泛舟網</title>
