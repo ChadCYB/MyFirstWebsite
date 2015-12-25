@@ -116,53 +116,54 @@ $num = mysql_num_rows ( $rsl );
 					if($numCheck == 0){
 						echo'
 						<form action="pass.apply.php" method="post">
-						<div class="modal fade" id="myModal'.$rows['matchID'].'" tabindex="-1"
+							<div class="modal fade" id="myModal'.$rows['matchID'].'" tabindex="-1"
 							role="dialog" aria-labelledby="myModalLabel">
-						<div class="modal-dialog" role="document">
-						<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-							<button class="btn btn-primary fa fa-safari" type="button" style="font-size: 40px">
-								泛舟梯次 <span class="badge" style="font-size: 30px">'.$rows['matchID'].'</span>
-							</button>
-						</div>
-						<div class="modal-body bg-info">
-							<div class="form-group has-success">
-							  <div class="input-group">
-							    <span class="input-group-addon">等級限制</span>
-								<input class="form-control input-lg" style="font-weight:bold"
-								type="text" value="'. $rows ['difficulty'] .'" readonly>
-								<span class="input-group-addon">等</span>
-							  </div>
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<button class="btn btn-primary fa fa-safari" type="button" style="font-size: 40px">
+											泛舟梯次 <span class="badge" style="font-size: 30px">'.$rows['matchID'].'</span>
+										</button>
+									</div>
+									<div class="modal-body bg-info">
+										<div class="form-group has-success">
+											<div class="input-group">
+												<span class="input-group-addon">等級限制</span>
+												<input class="form-control input-lg" style="font-weight:bold"
+												type="text" value="'. $rows ['difficulty'] .'" readonly>
+												<span class="input-group-addon">等</span>
+											</div>
+										</div>
+										<div class="form-group has-success">
+											<div class="input-group">
+												<span class="input-group-addon">報名費用</span>
+												<input class="form-control input-lg" style="font-weight:bold"
+												type="text" name=gamePrice value="'.$gameMoney.'" readonly>
+												<span class="input-group-addon">萬</span>
+											</div>
+										</div>
+										<div class="form-group has-success">
+											<div class="input-group">
+												<span class="input-group-addon">泛舟日期</span>
+												<input class="form-control input-lg" style="font-weight:bold"
+												type="text" value="'. $rows ['matchDate'] .'" readonly>
+											</div>
+										</div>
+											<input class="form-control input-lg" style="font-weight:bold"
+											type="text" value="" readonly>
+											</div>
+										<div class="modal-footer">
+											<input type="hidden" name=hiddenID value='.$rows['matchID'].'>
+											<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+											<input type="submit" class="btn btn-primary" value="確認報名">
+										</div>
+									</div>
+								</div>
 							</div>
-							<div class="form-group has-success">
-							  <div class="input-group">
-							    <span class="input-group-addon">報名費用</span>
-								<input class="form-control input-lg" style="font-weight:bold"
-								type="text" name=gamePrice value="'.$gameMoney.'" readonly>
-								<span class="input-group-addon">萬</span>
-							  </div>
-							</div>
-							<div class="form-group has-success">
-							  <div class="input-group">
-							    <span class="input-group-addon">泛舟日期</span>
-								<input class="form-control input-lg" style="font-weight:bold"
-								type="text" value="'. $rows ['matchDate'] .'" readonly>
-							  </div>
-							</div>
-							<input class="form-control input-lg" style="font-weight:bold"
-								type="text" value="" readonly>
-						</div>
-						<div class="modal-footer">
-								<input type="hidden" name=hiddenID value='.$rows['matchID'].'>
-								<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
-								<input type="submit" class="btn btn-primary" value="確認報名">
-						</div>
-						</div>
-						</div>
-					</div></form>';
+						</form>';
 					}
 				}
 				?>
@@ -177,7 +178,7 @@ $num = mysql_num_rows ( $rsl );
 		$uID =  preg_replace("/[\'\"]+/" , '' ,$_SESSION['uID']);
 		$mID =  preg_replace("/[\'\"]+/" , '' ,$_POST['hiddenID']);
 		$sqlApply = "INSERT INTO `game` (`userID`, `matchID`) VALUES ('$uID', '$mID')";
-
+		// echo "<script>alert('Checkpoint');</script>";
 		$userMoney -= $_POST['gamePrice'];	//報名費用扣款
 		//UPDATE `info` SET `Money` = 50 WHERE `userID` = 1;
 		$sqlMoney = "UPDATE `info` SET `Money` = ". $userMoney ." WHERE `userID` = ".$userID;

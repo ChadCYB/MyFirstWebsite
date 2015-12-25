@@ -23,7 +23,7 @@ $rslRiv = @mysql_query ( "SELECT No,Name FROM river WHERE 1" );
 $num = mysql_num_rows ( $rslRiv );
 $rslMatch = @mysql_query ( "SELECT * FROM `competition` WHERE 1" );
 $numMatchAll = mysql_num_rows ( $rslMatch );
-$rslMatch = @mysql_query ( "SELECT * FROM `competition` WHERE status != 0" );
+$rslMatch = @mysql_query ( "SELECT * FROM `competition` WHERE matchDate < now()" );
 $numMatch = mysql_num_rows ( $rslMatch );
 
 $rslAll = mysql_query ( "SELECT competition.matchID, river.Name, competition.difficulty, competition.price,	
@@ -72,10 +72,10 @@ $numAll = mysql_num_rows ( $rslAll );
 							echo "<option value=". $rowRiv[0] .">".$rowRiv[0].".".$rowRiv[1]."</option>";
 						}?>
 					</select></th>
-					<td><input type="text" class="form-control" placeholder="Difficulty" name="diff"></td>
-					<td><input type="text" class="form-control" placeholder="Price" name="price"></td>
-					<td><input type="text" class="form-control" placeholder="Max people" name="maxP"></td>
-					<td><input type="text" class="form-control" placeholder="After N day" name="afterDate"></td>
+					<td><input type="number" class="form-control" placeholder="Difficulty" name="diff" min="1" required></td>
+					<td><input type="number" class="form-control" placeholder="Price" name="price" min="0" required></td>
+					<td><input type="number" class="form-control" placeholder="Max people" name="maxP" min="1" required></td>
+					<td><input type="number" class="form-control" placeholder="After N day" name="afterDate" min="0" required></td>
 					<td><input type="submit" class="btn btn-success" name="sure" value="新增"></td>
 				</tr> </tbody>
 			</table>
@@ -117,7 +117,7 @@ $numAll = mysql_num_rows ( $rslAll );
 				<th>Cur.P</th>
 				<th>Date</th>
 				<th>Status</th>
-				<th></th>
+				<!-- <th></th> -->
 			</tr>
 		</thead>
 		<tbody>
@@ -135,8 +135,9 @@ $numAll = mysql_num_rows ( $rslAll );
 					<td>' . $count [0] . '</td>
 					<td>' . $rows ['matchDate'] . '</td>
 					<td>' . $rows ['status'] . '</td>
-					<td><button type="button" class="btn btn-success">修改</button></td>
+					
 				</tr>';
+				//<td><button type="button" class="btn btn-success">修改</button></td>
 			}
 			?>
 		</tbody>

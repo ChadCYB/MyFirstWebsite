@@ -1,6 +1,6 @@
 <?php
-include 'fun.inc.php';
 include 'php/mysql_conn.php';
+include 'fun.inc.php';
 
 $row = @mysql_query ( "SELECT * FROM `info` WHERE `ID` = '" . $_SESSION ['userID'] . "' " );
 if (! $result = @mysql_fetch_array ( $row )) {
@@ -133,7 +133,7 @@ if (! $result = @mysql_fetch_array ( $row )) {
 					</tr>
 				</thead>
 				<tbody>
-				<?php
+<?php
 				$today = date('Y-m-j');
 
 				for($i = 0; $i < $numGame; $i ++) {
@@ -181,13 +181,13 @@ if (! $result = @mysql_fetch_array ( $row )) {
 						}
 					}
 				}
-				?>
+?>
 			</tbody>
 			</table>
 		</div>
 		<form action="apply.php" method="post">
 			<Input type="button" class="btn btn-primary btn-lg" value="登出"
-				onclick="location.href='../login/logout.php'">
+				onclick="location.href='log.logout.php'">
 		</form>
 	</div>
 </body>
